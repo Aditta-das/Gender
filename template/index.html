@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'font-awesome.min.css' %}"/>
+    <title>Hot Or Not</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2 class="text" style="text-align: center;">Hot Or Not</h2>
+    </div>
+    <div class="col-lg-12">
+      <div class="container">
+        <h5 style="text-align: center;">{{ user.username }}</h5>
+        {% if request.user.is_authenticated %}
+			<li><a href="{% url 'profile' user.username %}">{{ request.user }}</a></li>
+			<li><a href="{% url 'signout' %}">Signout</a></li>
+          {% else %}
+			<li><a href="{% url 'signin' %}">Signin</a></li>
+          {% endif %}
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-6">
+          <img src="{{ hot.image.url }}" style="width:200px; height:200px;position: relative; margin:177px;" alt="">
+          <h5 style="position: relative;bottom: 130px;left: 240px;">{{ user.get_full_name }}</h5>
+        </div>
+        {% if author.gender == Male %}
+        <div class="col-lg-6">
+          <img src="{{ com.image.url }}" style="width:200px; height:200px;position: relative; margin:177px;" alt="">
+          <h5 style="position: relative;bottom: 130px;left: 240px;">{{ com.user.get_full_name }}</h5>
+        </div>
+        {% else %}
+        <div class="col-lg-6">
+          <img src="{{ com2.image.url }}" style="width:200px; height:200px;position: relative; margin:177px;" alt="">
+          <h5 style="position: relative;bottom: 130px;left: 240px;">{{ com2.user.get_full_name }}</h5>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </body>
+</html>
